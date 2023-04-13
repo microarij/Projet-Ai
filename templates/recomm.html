@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style type="text/css">
+   .formStyle {
+    font-size: .8rem;
+    border-radius: 10rem;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6e707e;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d1d3e2;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+     }
+  </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin-Dashbord</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/innovo.png')}}" type="image/png">
+
+    <!-- Custom fonts for this template-->
+    <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{{ url_for('static', filename='css/sb-admin-2.min.css')}}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+      
+            
+
+           
+            
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                   
+                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <!-- Topbar Navbar -->
+                   <ul class="navbar-nav ">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li style='position: absolute;'>
+
+                                <img class="img-profile rounded-circle" style="width: 45px; height: 45px" 
+                                    src="{{ url_for('static', filename='img/innovo.png')}}">
+                        </li>
+
+                      <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow" style=' padding-left:1300px;padding-top:-130px'>
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{account['username'] }}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="{{ url_for('static', filename='img/undraw_profile.svg')}}">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ url_for('profile') }}">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Recommendation System</h1>
+                    <form class="user" method="post">
+                                
+                               
+                                
+                                <div class="form-group row">
+                                    <div class="col-sm-12">
+                                        <label for="Input" class="cols-sm-2 control-label">Please enter your query here.</label>
+                                        <input type="text" class="formStyle" id="Input" name="Input" 
+                                            placeholder="Input">
+                                    </div>
+                                </div>
+
+                                    <input type="submit" value="Recommendation" class="btn btn-primary btn-user btn-block">
+                                <hr>
+                            </form>
+ <div class="row" >
+   <!-- Tasks Card Example -->
+<div class = "col-12">
+<div id="accordion">
+  <div class="card" >
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          {{ c1 }}
+        </button>
+      </h5>
+    </div>
+
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <ul>
+
+        {% if p1 is defined %}
+
+        <p>
+          <a class="btn btn-info col-3" data-toggle="collapse" href="#Inputs" role="button" aria-expanded="false" aria-controls="Inputs">Inputs</a>
+          <button class="btn btn-success col-3" type="button" data-toggle="collapse" data-target="#Outputs" aria-expanded="false" aria-controls="Outputs">Outputs</button>
+          <button class="btn btn-warning col-3" type="button" data-toggle="collapse" data-target="#Technicaltools" aria-expanded="false" aria-controls="Technicaltools">Technical tools</button>
+        </p>
+        
+
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="Inputs">
+              <div class="card card-body">
+                {% for key,value in p1.iterrows() %}
+                {% if value['Type'] == "Has_inputs" %} 
+
+                    <ul class="nav-item dropdown no-arrow col-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ value['Concept'] }} </span>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu " style='color: black'>
+                                <br class="dropdown-item " href="#">
+                                    <a style="color: blue">Definition : </a>
+                                    {{ value['Definition'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                    <a style="color: blue">References : </a>
+                                    {{ value['DataProperty'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                     <a style="color: blue">Synonymes : </a>
+                                     {{ value['Synonymes'] }}
+                                </br>
+                            </div>
+                        </ul>
+
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="Outputs">
+              <div class="card card-body">
+                {% for key,value in p1.iterrows() %}
+                {% if value['Type'] == "Has_outputs" %}
+                   
+                   <ul class="nav-item dropdown no-arrow col-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ value['Concept'] }} </span>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu " style='color: black'>
+                                <br class="dropdown-item " href="#">
+                                    <a style="color: blue">Definition : </a>
+                                    {{ value['Definition'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                    <a style="color: blue">References : </a>
+                                    {{ value['DataProperty'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                     <a style="color: blue">Synonymes : </a>
+                                     {{ value['Synonymes'] }}
+                                </br>
+                            </div>
+                        </ul>
+
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="Technicaltools">
+              <div class="card card-body">
+                {% for key,value in p1.iterrows() %}
+                {% if value['Type'] == "Has_Technics_Tools" %}
+                    
+                   <ul class="nav-item dropdown no-arrow col-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ value['Concept'] }} </span>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu " style='color: black'>
+                                <br class="dropdown-item " href="#">
+                                    <a style="color: blue">Definition : </a>
+                                    {{ value['Definition'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                    <a style="color: blue">References : </a>
+                                    {{ value['DataProperty'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                     <a style="color: blue">Synonymes : </a>
+                                     {{ value['Synonymes'] }}
+                                </br>
+                            </div>
+                        </ul>
+
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div> 
+
+        {% endif %}
+        </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          {{ c2 }}
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+        {% if p2 is defined %}
+        <p>
+          <a class="btn btn-info col-3" data-toggle="collapse" href="#Inputs" role="button" aria-expanded="false" aria-controls="Inputs">Inputs</a>
+          <button class="btn btn-success col-3" type="button" data-toggle="collapse" data-target="#Outputs" aria-expanded="false" aria-controls="Outputs">Outputs</button>
+          <button class="btn btn-warning col-3" type="button" data-toggle="collapse" data-target="#Technicaltools" aria-expanded="false" aria-controls="Technicaltools">Technical tools</button>
+        </p>
+        
+
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="Inputs">
+              <div class="card card-body">
+                {% for key,value in p2.iterrows() %}
+                {% if value['Type'] == "Has_inputs" %} 
+
+                    <ul class="nav-item dropdown no-arrow col-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ value['Concept'] }} </span>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu " style='color: black'>
+                                <br class="dropdown-item " href="#">
+                                    <a style="color: blue">Definition : </a>
+                                    {{ value['Definition'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                    <a style="color: blue">References : </a>
+                                    {{ value['DataProperty'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                     <a style="color: blue">Synonymes : </a>
+                                     {{ value['Synonymes'] }}
+                                </br>
+                            </div>
+                        </ul>
+
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="Outputs">
+              <div class="card card-body">
+                {% for key,value in p2.iterrows() %}
+                {% if value['Type'] == "Has_outputs" %}
+                   
+                   <ul class="nav-item dropdown no-arrow col-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ value['Concept'] }} </span>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu " style='color: black'>
+                                <br class="dropdown-item " href="#">
+                                    <a style="color: blue">Definition : </a>
+                                    {{ value['Definition'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                    <a style="color: blue">References : </a>
+                                    {{ value['DataProperty'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                     <a style="color: blue">Synonymes : </a>
+                                     {{ value['Synonymes'] }}
+                                </br>
+                            </div>
+                        </ul>
+
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="Technicaltools">
+              <div class="card card-body">
+                {% for key,value in p2.iterrows() %}
+                {% if value['Type'] == "Has_Technics_Tools" %}
+                    
+                   <ul class="nav-item dropdown no-arrow col-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ value['Concept'] }} </span>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu " style='color: black'>
+                                <br class="dropdown-item " href="#">
+                                    <a style="color: blue">Definition : </a>
+                                    {{ value['Definition'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                    <a style="color: blue">References : </a>
+                                    {{ value['DataProperty'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                     <a style="color: blue">Synonymes : </a>
+                                     {{ value['Synonymes'] }}
+                                </br>
+                            </div>
+                        </ul>
+
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div> 
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          {{ c3 }}
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        {% if p3 is defined %}
+        <p>
+          <a class="btn btn-info col-3" data-toggle="collapse" href="#Inputs" role="button" aria-expanded="false" aria-controls="Inputs">Inputs</a>
+          <button class="btn btn-success col-3" type="button" data-toggle="collapse" data-target="#Outputs" aria-expanded="false" aria-controls="Outputs">Outputs</button>
+          <button class="btn btn-warning col-3" type="button" data-toggle="collapse" data-target="#Technicaltools" aria-expanded="false" aria-controls="Technicaltools">Technical tools</button>
+        </p>
+        
+
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="Inputs">
+              <div class="card card-body">
+                {% for key,value in p3.iterrows() %}
+                {% if value['Type'] == "Has_inputs" %} 
+
+                    <ul class="nav-item dropdown no-arrow col-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ value['Concept'] }} </span>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu " style='color: black'>
+                                <br class="dropdown-item " href="#">
+                                    <a style="color: blue">Definition : </a>
+                                    {{ value['Definition'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                    <a style="color: blue">References : </a>
+                                    {{ value['DataProperty'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                     <a style="color: blue">Synonymes : </a>
+                                     {{ value['Synonymes'] }}
+                                </br>
+                            </div>
+                        </ul>
+
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="Outputs">
+              <div class="card card-body">
+                {% for key,value in p3.iterrows() %}
+                {% if value['Type'] == "Has_outputs" %}
+                   
+                   <ul class="nav-item dropdown no-arrow col-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ value['Concept'] }} </span>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu " style='color: black'>
+                                <br class="dropdown-item " href="#">
+                                    <a style="color: blue">Definition : </a>
+                                    {{ value['Definition'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                    <a style="color: blue">References : </a>
+                                    {{ value['DataProperty'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                     <a style="color: blue">Synonymes : </a>
+                                     {{ value['Synonymes'] }}
+                                </br>
+                            </div>
+                        </ul>
+
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="collapse multi-collapse" id="Technicaltools">
+              <div class="card card-body">
+                {% for key,value in p3.iterrows() %}
+                {% if value['Type'] == "Has_Technics_Tools" %}
+                    
+                   <ul class="nav-item dropdown no-arrow col-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"> {{ value['Concept'] }} </span>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu " style='color: black'>
+                                <br class="dropdown-item " href="#">
+                                    <a style="color: blue">Definition : </a>
+                                    {{ value['Definition'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                    <a style="color: blue">References : </a>
+                                    {{ value['DataProperty'] }}
+                                </br>
+                                <br class="dropdown-item" href="#">
+                                     <a >Synonymes : </a>
+                                     {{ value['Synonymes'] }}
+                                </br>
+                            </div>
+                        </ul>
+
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div> 
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+                       
+
+                        
+
+</div>
+                            
+ 
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+           
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="{{ url_for('logout') }}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- Bootstrap core JavaScript-->
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ url_for('static', filename='js/sb-admin-2.min.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ url_for('static', filename='vendor/chart.js/Chart.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ url_for('static', filename='js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/demo/chart-pie-demo.js')}}"></script>
+
+</body>
+
+</html>
